@@ -1,15 +1,11 @@
 // utils/helpers.js
 
 export function isBetween (num, x, y) {
-  if (num >= x && num <= y) {
-    return true
-  }
-
-  return false
+  return num >= x && num <= y;
 }
 
 export function calculateDirection (heading) {
-  let direction = ''
+  let direction = '';
 
   if (isBetween(heading, 0, 22.5)) {
     direction = 'North'
@@ -37,7 +33,8 @@ export function calculateDirection (heading) {
 }
 
 export function timeToString (time = Date.now()) {
-  const date = new Date(time)
-  const todayUTC = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
+  const date = new Date(time);
+  const todayUTC = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   return todayUTC.toISOString().split('T')[0]
 }
+
