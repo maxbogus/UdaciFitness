@@ -1,6 +1,7 @@
 import {Ionicons} from '@expo/vector-icons'
 import React, {Component} from 'react'
 import {View, TouchableOpacity, Text} from 'react-native'
+import {connect} from 'react-redux'
 
 import {submitEntry, removeEntry} from '../utils/api'
 import {getMetricMetaInfo, timeToString} from '../utils/helpers'
