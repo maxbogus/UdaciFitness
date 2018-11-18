@@ -2,6 +2,7 @@ import {Ionicons} from '@expo/vector-icons'
 import React, {Component} from 'react'
 import {View, TouchableOpacity, Text} from 'react-native'
 
+import {submitEntry, removeEntry} from '../utils/api'
 import {getMetricMetaInfo, timeToString} from '../utils/helpers'
 import UdaciSlider from './UdaciSlider'
 import UdaciSteppers from './UdaciSteppers'
@@ -67,11 +68,11 @@ export default class AddEntry extends Component {
             swim: 0,
             sleep: 0,
             eat: 0,
-        }))
+        }));
 
         // Navigate to Home
 
-        // Save to DB
+        submitEntry({key, entry})
 
         // Clear local notification
     };
@@ -83,7 +84,7 @@ export default class AddEntry extends Component {
 
         // Route to Home
 
-        // Save to DB
+        submitEntry({key})
     };
 
     render() {
