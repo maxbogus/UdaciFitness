@@ -1,4 +1,4 @@
-import {RECIEVE_ENTRIES, ADD_ENTRY} from "../assets";
+import {RECIEVE_ENTRIES, ADD_ENTRY} from "../actions/index";
 
 function entries (state = {}, action) {
     switch (action.type) {
