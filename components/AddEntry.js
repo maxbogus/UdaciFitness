@@ -84,7 +84,7 @@ export default class AddEntry extends Component {
 
         // Route to Home
 
-        submitEntry({key})
+        removeEntry({key})
     };
 
     render() {
