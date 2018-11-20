@@ -17,7 +17,7 @@ function SubmitBtn({onPress}) {
         <TouchableOpacity
             style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
             onPress={onPress}>
-            <Text styles={styles.submitBtnText}>SUBMIT</Text>
+            <Text style={styles.submitBtnText}>SUBMIT</Text>
         </TouchableOpacity>
     )
 }
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
     submitBtnText: {
         color: white,
         fontSize: 22,
-        textAlign: 'center'
-    }
+        textAlign: 'center',
+    },
 });
 
 function mapStateToProps(state) {
