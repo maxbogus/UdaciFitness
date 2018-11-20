@@ -4,7 +4,7 @@ import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 
 import {gray, purple, white} from "../utils/colors"
 
-export default function UdaciSteppers({max, unit, value, step, onIncrement, onDecrement}) {
+export default function UdaciSteppers({max, units, value, step, onIncrement, onDecrement}) {
     return (
         <View style={[styles.row, {justifyContent: 'space-between'}]}>
             {Platform.OS === 'ios'
@@ -34,7 +34,7 @@ export default function UdaciSteppers({max, unit, value, step, onIncrement, onDe
                 </View>}
             <View style={styles.metricCounter}>
                 <Text style={{fontSize: 24, textAlign: 'center'}}>{value}</Text>
-                <Text style={{fontSize: 18, color: gray}}>{unit}</Text>
+                <Text style={{fontSize: 18, color: gray}}>{units}</Text>
             </View>
         </View>
     )
