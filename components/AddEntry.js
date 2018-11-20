@@ -101,7 +101,7 @@ class AddEntry extends Component {
 
         if (this.props.alreadyLogged) {
             return (
-                <View>
+                <View style={styles.center}>
                     <Ionicons name='ios-happy' size={100}/>
                     <Text>You already logged your information for today</Text>
                     <TextButton onPress={this.reset}>
@@ -112,14 +112,14 @@ class AddEntry extends Component {
         }
 
         return (
-            <View>
+            <View style={styles.container}>
                 <DataHeader date={new Date().toLocaleDateString()}/>
                 {Object.keys(metaInfo).map((key) => {
                     const {getIcon, type, ...rest} = metaInfo[key];
                     const value = this.state[key];
 
                     return (
-                        <View key={key}>
+                        <View key={key} style={styles.row}>
                             {getIcon()}
                             {type === 'slider'
                                 ? <UdaciSlider
@@ -143,14 +143,6 @@ class AddEntry extends Component {
 }
 
 const styles = StyleSheet.create({
-    iosSubmitBtn: {
-        backgroundColor: purple,
-        padding: 10,
-        borderRadius: 7,
-        height: 45,
-        marginRight: 40,
-        marginLeft: 40,
-    },
     androidSubmitBtn: {
         backgroundColor: purple,
         padding: 10,
@@ -160,6 +152,31 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         alignSelf: 'flex-end',
         justifyContent: 'center',
+        alignItems: 'center',
+    },
+    center: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 30,
+        marginRight: 30,
+    },
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: white,
+    },
+    iosSubmitBtn: {
+        backgroundColor: purple,
+        padding: 10,
+        borderRadius: 7,
+        height: 45,
+        marginRight: 40,
+        marginLeft: 40,
+    },
+    row: {
+        flexDirection: 'row',
+        flex: 1,
         alignItems: 'center',
     },
     submitBtnText: {
