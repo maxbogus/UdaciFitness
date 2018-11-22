@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
-import {Text, View} from 'react-native'
+import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {connect} from 'react-redux'
-import {addEntry, recieveEntries} from "../actions"
-import {getDailyReminderValue, timeToString} from "../utils/helpers"
-import {fetchCalendarResults} from "../utils/api"
 import UdacityFitnessCalendar from 'udacifitness-calendar'
+
+import {addEntry, recieveEntries} from "../actions"
+import {fetchCalendarResults} from "../utils/api"
+import {white} from "../utils/colors"
+import {getDailyReminderValue, timeToString} from "../utils/helpers"
+import DateHeader from './DataHeader'
 
 class History extends Component {
     componentDidMount() {
@@ -21,14 +24,21 @@ class History extends Component {
     }
 
     renderItem = ({today, ...metrics}, formattedDate, key) => (
-        <View>
+        <View style={styles.item}>
             {today
-                ? <Text>{JSON.stringify(today)}</Text>
-                : <Text>{JSON.stringify(metrics)}</Text>}
+                ? <View>
+                    <DateHeader date={formattedDate}/>
+                    <Text style={styles.noDataText}>
+                        {today}
+                    </Text>
+                </View>
+                : <TouchableOpacity onPress={() => console.log('Pressed!')}>
+                    <Text>{JSON.stringify(metrics)}</Text>
+                </TouchableOpacity>}
         </View>
     );
 
-    renderEmptyItem(formattedDate) {
+    static renderEmptyItem(formattedDate) {
         return (
             <View>
                 <Text>No data for this date</Text>
@@ -43,11 +53,30 @@ class History extends Component {
             <UdacityFitnessCalendar
                 items={entries}
                 renderItem={this.renderItem}
-                renderEmptyDay={this.renderEmptyItem}
+                renderEmptyDay={History.renderEmptyItem}
             />
         )
     }
 }
+
+const styles = StyleSheet.create({
+    item: {
+        backgroundColor: white,
+        borderRadius: Platform.OS === 'ios' ? 16 : 2,
+        padding: 20,
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 17,
+        justifyContent: 'center',
+        shadowRadius: 3,
+        shadowOpacity: 0.8,
+        shadowColor: 'rgba(0,0,0,0.24)',
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        }
+    }
+});
 
 function mapStateToProps(entries) {
     return {
