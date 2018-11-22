@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {connect} from 'react-redux'
-import UdacityFitnessCalendar from 'udacifitness-calendar'
+import UdaciFitnessCalendar from 'udacifitness-calendar'
 
 import {addEntry, recieveEntries} from "../actions"
 import {fetchCalendarResults} from "../utils/api"
@@ -38,10 +38,13 @@ class History extends Component {
         </View>
     );
 
-    static renderEmptyItem(formattedDate) {
+    renderEmptyDate(formattedDate) {
         return (
-            <View>
-                <Text>No data for this date</Text>
+            <View style={styles.item}>
+                <DateHeader date={formattedDate}/>
+                <Text style={styles.noDataText}>
+                    You didn't log any data on this day.
+                </Text>
             </View>
         )
     };
@@ -50,10 +53,10 @@ class History extends Component {
         const {entries} = this.props;
 
         return (
-            <UdacityFitnessCalendar
+            <UdaciFitnessCalendar
                 items={entries}
                 renderItem={this.renderItem}
-                renderEmptyDay={History.renderEmptyItem}
+                renderEmptyDate={this.renderEmptyDate}
             />
         )
     }
@@ -75,6 +78,11 @@ const styles = StyleSheet.create({
             width: 0,
             height: 3,
         }
+    },
+    noDataText: {
+        fontSize: 20,
+        paddingTop: 20,
+        paddingBottom: 20,
     }
 });
 
