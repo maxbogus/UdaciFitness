@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {Text, View} from 'react-native'
 import {connect} from 'react-redux'
-import {recieveEntries, addEntry} from "../actions"
-import {timeToString, getDailyReminderValue} from "../utils/helpers"
-import { fetchCalendarResults} from "../utils/api"
+import {addEntry, recieveEntries} from "../actions"
+import {getDailyReminderValue, timeToString} from "../utils/helpers"
+import {fetchCalendarResults} from "../utils/api"
+import UdacityFitnessCalendar from 'udacifitness-calendar'
 
 class History extends Component {
     componentDidMount() {
@@ -19,13 +20,31 @@ class History extends Component {
             })
     }
 
-    render() {
+    renderItem = ({today, ...metrics}, formattedDate, key) => (
+        <View>
+            {today
+                ? <Text>{JSON.stringify(today)}</Text>
+                : <Text>{JSON.stringify(metrics)}</Text>}
+        </View>
+    );
+
+    renderEmptyItem(formattedDate) {
         return (
             <View>
-                <Text>
-                    {JSON.stringify(this.props)}
-                </Text>
+                <Text>No data for this date</Text>
             </View>
+        )
+    };
+
+    render() {
+        const {entries} = this.props;
+
+        return (
+            <UdacityFitnessCalendar
+                items={entries}
+                renderItem={this.renderItem}
+                renderEmptyDay={this.renderEmptyItem}
+            />
         )
     }
 }
