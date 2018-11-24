@@ -1,5 +1,6 @@
+import {Constants} from 'expo'
 import React from 'react'
-import {View, Platform} from 'react-native'
+import {View, Platform, StatusBar} from 'react-native'
 import {createAppContainer, createBottomTabNavigator} from 'react-navigation'
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
@@ -27,6 +28,9 @@ const Tabs = createBottomTabNavigator({
         }
     }
 }, {
+    navigationOptions: {
+      header: null
+    },
     tabBarOptions: {
         activeTintColor: Platform.OS === 'ios' ? purple : white,
         style: {
@@ -42,6 +46,13 @@ const Tabs = createBottomTabNavigator({
         }
     }
 });
+function UdaciStatusBar({backgroundColor, ...props}) {
+    return (
+        <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+            <StatusBar translucent backgroundColor={backgroundColor} {...props}/>
+        </View>
+    )
+}
 const Container = createAppContainer(Tabs);
 
 export default class App extends React.Component {
@@ -49,7 +60,7 @@ export default class App extends React.Component {
         return (
             <Provider store={store}>
                 <View style={{flex: 1}}>
-                <View style={{height: 20}}/>
+                <UdaciStatusBar backgroundColor={purple} barStyle='light-content'/>
                     <Container/>
                 </View>
             </Provider>
