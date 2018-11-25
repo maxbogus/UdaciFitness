@@ -26,8 +26,8 @@ class EntryDetail extends Component {
       const {remove, goBack, entryId} = this.props;
 
       remove();
-        goBack();
-        removeEntry(entryId);
+      goBack();
+      removeEntry(entryId);
     };
 
     shoulComponentUpdate(nextProps) {
@@ -64,7 +64,7 @@ function mapDispatchToProps(dispatch, {navigation}) {
             ? getDailyReminderValue()
             : null,
         })),
-        goBack: () => navigation.goBack()
+        goBack: () => navigation.goBack(),
     }
 }
 
