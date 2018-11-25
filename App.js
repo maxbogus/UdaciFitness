@@ -1,16 +1,17 @@
+import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import {Constants} from 'expo'
 import React from 'react'
 import {View, Platform, StatusBar} from 'react-native'
 import {createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation'
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
-import {FontAwesome, Ionicons} from '@expo/vector-icons'
 
 import AddEntry from './components/AddEntry'
 import EntryDetail from './components/EntryDetail'
-import {purple, white} from "./utils/colors"
 import History from "./components/History"
+import Live from './components/Live'
 import reducer from './reducers'
+import {purple, white} from "./utils/colors"
 
 const store = createStore(reducer);
 const Tabs = createBottomTabNavigator({
@@ -26,6 +27,13 @@ const Tabs = createBottomTabNavigator({
         navigationOptions: {
             tabBarLevel: 'Add Entry',
             tabBarIcon: ({tintColor}) => <FontAwesome name='plus-square' size={30} color={tintColor}/>
+        }
+    },
+    Live: {
+        screen: Live,
+        navigationOptions: {
+            tabBarLevel: 'Live',
+            tabBarIcon: ({tintColor}) => <Ionicons name='ios-speedometer' size={30} color={tintColor}/>
         }
     }
 }, {
