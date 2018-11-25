@@ -1,13 +1,14 @@
 import {Ionicons} from '@expo/vector-icons'
 import React, {Component} from 'react'
 import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {NavigationActions} from 'react-navigation'
 import {connect} from 'react-redux'
 
-import {addEntry} from "../actions";
 import DataHeader from './DataHeader'
 import TextButton from './TextButton'
 import UdaciSlider from './UdaciSlider'
 import UdaciSteppers from './UdaciSteppers'
+import {addEntry} from "../actions"
 import {removeEntry, submitEntry} from '../utils/api'
 import {purple, white} from "../utils/colors"
 import {getDailyReminderValue, getMetricMetaInfo, timeToString} from '../utils/helpers'
@@ -77,7 +78,7 @@ class AddEntry extends Component {
             eat: 0,
         }));
 
-        // Navigate to Home
+        this.toHome();
 
         submitEntry({key, entry})
 
@@ -91,9 +92,15 @@ class AddEntry extends Component {
             [key]: getDailyReminderValue()
         }));
 
-        // Route to Home
+        this.toHome();
 
         removeEntry({key})
+    };
+
+    toHome = () => {
+        this.props.navigation.dispatch(NavigationActions.back({
+            key: 'AddEntry'
+        }))
     };
 
     render() {

@@ -30,7 +30,7 @@ class EntryDetail extends Component {
       removeEntry(entryId);
     };
 
-    shoulComponentUpdate(nextProps) {
+    shouldComponentUpdate(nextProps) {
         return nextProps.metrics !== null && !nextProps.metrics.today
     }
 
