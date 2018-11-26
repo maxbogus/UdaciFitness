@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 export default class Live extends Component {
     state = {
         coords: null,
-        status: 'undetermined',
+        status: 'denied',
         direction: '',
     };
 
@@ -49,8 +49,9 @@ export default class Live extends Component {
 
         if (status === 'denied') {
             return (
-                <View>
-                    <Text>Denied</Text>
+                <View style={styles.center}>
+                    <Foundation name='alert' size={50}/>
+                    <Text>You denied your location. You can fix this by visiting your settings and enabling location services.</Text>
                 </View>
             )
         }
