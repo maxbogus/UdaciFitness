@@ -110,13 +110,13 @@ export default class Live extends Component {
                     <Text style={styles.header}>You're heading</Text>
                     <Text style={styles.direction}>North</Text>
                 </View>
-                <View style={styles.metricCounter}>
+                <View style={styles.metricContainer}>
                     <View style={styles.metric}>
                         <Text style={[styles.header, {color: white}]}>
                             Altitude
                         </Text>
                         <Text style={[styles.subHeader, {color: white}]}>
-                            {200} Feet
+                            {200} feet
                         </Text>
                     </View>
                     <View style={styles.metric}>
