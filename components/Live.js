@@ -1,8 +1,10 @@
 import {Foundation} from '@expo/vector-icons'
+import {Location, Permissions} from 'expo'
 import React, {Component} from 'react'
 import {ActivityIndicator, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 
 import {purple, white} from "../utils/colors"
+import {calculateDirection} from "../utils/helpers"
 
 const styles = StyleSheet.create({
     button: {
@@ -71,6 +73,39 @@ export default class Live extends Component {
 
     askPermission = () => {
 
+    };
+
+    componentDidMount() {
+        Permissions.getAsync(Permissions.LOCATION)
+            .then(({status}) => {
+                if (status === 'granted') {
+                    return this.setLocation()
+                }
+
+                this.setState(() => ({status}))
+            })
+            .catch((error) => {
+                console.warn('Error getting location permission: ', error);
+
+                this.setState(() => ({status: 'undetermined'}))
+            })
+    }
+
+    setLocation = () => {
+        Location.watchPositionAsync({
+            enableHighAccuracy: true,
+            timeInterval: 1,
+            distanceInterval: 1,
+        }, ({coords}) => {
+            const newDirection = calculateDirection(coords.heading);
+            const {direction} = this.state;
+
+            this.setState(() => ({
+                coords,
+                status: 'granted',
+                direction: newDirection,
+            }))
+        })
     };
 
     render() {
