@@ -72,7 +72,15 @@ export default class Live extends Component {
     };
 
     askPermission = () => {
+        Permissions.askAsync(Permissions.LOCATION)
+            .then(({status}) => {
+                if (status === 'granted') {
+                    return this.setLocation()
+                }
 
+                this.setState(() => ({status}))
+            })
+            .catch((error) => console.warn('error asking Location permission: ', error))
     };
 
     componentDidMount() {
