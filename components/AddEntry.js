@@ -11,7 +11,7 @@ import UdaciSteppers from './UdaciSteppers'
 import {addEntry} from "../actions"
 import {removeEntry, submitEntry} from '../utils/api'
 import {purple, white} from "../utils/colors"
-import {getDailyReminderValue, getMetricMetaInfo, timeToString} from '../utils/helpers'
+import {getDailyReminderValue, getMetricMetaInfo, timeToString, clearLocalNotification, setLocalNotification} from '../utils/helpers'
 
 function SubmitBtn({onPress}) {
     return (
@@ -80,9 +80,10 @@ class AddEntry extends Component {
 
         this.toHome();
 
-        submitEntry({key, entry})
+        submitEntry({key, entry});
 
-        // Clear local notification
+        clearLocalNotification()
+            .then(setLocalNotification)
     };
 
     reset = () => {
