@@ -12,6 +12,7 @@ import History from "./components/History"
 import Live from './components/Live'
 import reducer from './reducers'
 import {purple, white} from "./utils/colors"
+import {setLocalNotification} from "./utils/helpers"
 
 const store = createStore(reducer);
 const Tabs = createBottomTabNavigator({
@@ -82,6 +83,9 @@ function UdaciStatusBar({backgroundColor, ...props}) {
 }
 
 export default class App extends React.Component {
+    componentDidMount() {
+        setLocalNotification()
+    }
     render() {
         return (
             <Provider store={store}>

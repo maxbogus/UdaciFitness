@@ -192,7 +192,7 @@ export function setLocalNotification() {
                             Notifications.cancelAllScheduledNotificationsAsync();
 
                             let tomorrow = new Date();
-                            tomorrow.set(tomorrow.getDate() + 1);
+                            tomorrow.setDate(tomorrow.getDate() + 1);
                             tomorrow.setHours(20);
                             tomorrow.setMinutes(0);
 
