@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import {Text, View, StyleSheet} from 'react-native'
-import { connect} from 'react-redux'
+import {StyleSheet, View} from 'react-native'
+import {connect} from 'react-redux'
 
 import MetricCard from './MetricsCard'
 import {addEntry} from "../actions"
 import {removeEntry} from "../utils/api"
 import {white} from "../utils/colors"
-import {timeToString, getDailyReminderValue} from "../utils/helpers"
+import {getDailyReminderValue, timeToString} from "../utils/helpers"
 import TextButton from './TextButton'
 
 class EntryDetail extends Component {
@@ -23,11 +23,11 @@ class EntryDetail extends Component {
     };
 
     reset = () => {
-      const {remove, goBack, entryId} = this.props;
+        const {remove, goBack, entryId} = this.props;
 
-      remove();
-      goBack();
-      removeEntry(entryId);
+        remove();
+        goBack();
+        removeEntry(entryId);
     };
 
     shouldComponentUpdate(nextProps) {
@@ -61,8 +61,8 @@ function mapDispatchToProps(dispatch, {navigation}) {
     return {
         remove: () => dispatch(addEntry({
             [entryId]: timeToString() === entryId
-            ? getDailyReminderValue()
-            : null,
+                ? getDailyReminderValue()
+                : null,
         })),
         goBack: () => navigation.goBack(),
     }
